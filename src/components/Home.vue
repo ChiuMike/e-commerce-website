@@ -145,14 +145,14 @@
               data-toggle="list"
               href="#list-gift"
             >
-              <i class="fas fa-heart"></i></i> 情人節</a
+              <i class="fas fa-heart"></i> 情人節</a
             >
             <a href="#" class="list-group-item list-group-item-action"
-             @click.prevent="changeTopic('mom')":class="{active:topic=='mom'}">
+             @click.prevent="changeTopic('mom')" :class="{active:topic=='mom'}">
               <i class="fas fa-gift"></i> 母親節</a
             >
             <a href="#" class="list-group-item list-group-item-action"
-             @click.prevent="changeTopic('mas')":class="{active:topic=='mas'}">
+             @click.prevent="changeTopic('mas')" :class="{active:topic=='mas'}">
               <i class="fas fa-tree"></i> 聖誕節</a>
           </div>
         </div>
