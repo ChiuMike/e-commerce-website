@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+    <router-view :stared="star"></router-view>
   </div>
 </template>
 
@@ -9,6 +9,11 @@ import Home from './components/Home'
 
 export default {
   name: 'App',
+  data(){
+    return {
+      star:[],
+    }
+  }
 }
 </script>
 

@@ -14,12 +14,10 @@
         <i class="fas fa-store"></i>
         買多多商城
       </a>
+      <div class="d-flex">
       <div class="dropdown ml-auto">
-        <router-link class="btn btn-outline-success btn-lg" to="/payorder"
-          >結帳</router-link
-        >
         <button
-          class="btn btn-cart btn-lg"
+          class="btn btn-cart"
           data-toggle="dropdown"
           data-flip="false"
         >
@@ -45,7 +43,7 @@
                 </td>
                 <td class="align-middle">{{ item.product.title }}</td>
                 <td class="align-middle">
-                  {{ item.product.num }} {{ item.product.unit }}
+                  {{item.qty}} {{ item.product.unit }}
                 </td>
                 <td class="align-middle text-right">
                   ${{ item.product.price }}
@@ -58,8 +56,51 @@
           </a>
         </div>
       </div>
+      <router-link to="/payorder">
+        <button 
+         class="btn btn-outline-success btn-lg"
+         style="margin-right: 10px">
+         結帳
+        </button>
+      </router-link>
+      <div class="dropdown">
+        <button 
+        class="btn btn-outline-danger btn-lg"
+        data-toggle="dropdown"
+        data-flip="false"
+        style="position: relative;float: right;">
+         願望清單
+        </button>
+        <div
+          class="dropdown-menu dropdown-menu-right p-3"
+          style="min-width: 400px"
+          data-offset="400"
+        >
+          <h6>已選擇商品</h6>
+          <table class="table table-sm">
+            <tbody>
+              <tr v-for="item in stared" :key="item.id">
+                <img :src="item.imageUrl" 
+                 style="height: 50px;"/>
+                <td class="align-middle text-center">
+                  <a href="#removeModal" class="text-muted" data-toggle="modal">
+                    <i class="fas fa-times fa-lg" @click="cancelSatred(item.id)"></i>
+                  </a>
+                </td>
+                <td class="align-middle"><a href="#" @click="getMore(item.id)">{{item.title}}</a></td>
+                <td class="align-middle text-right">
+                  ${{ item.price }}/1{{item.unit}}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <a class="btn btn-primary btn-block" @click="cancelStared">
+            <i class="far fa-sad-tear fa-lg" ></i> 清空清單
+          </a>
+        </div>
+      </div>
+      </div>
     </nav>
-
     <div class="container.container-fluid" style="height: 400px">
       <div class="carousel slide" data-ride="carousel" id="carousel-demo">
         <ol class="carousel-indicators">
@@ -76,11 +117,17 @@
             <img
               class="d-block w-100"
               src="https://upload.cc/i1/2021/09/19/GXQU5L.jpg"
-              alt=""/>
-            <div class="carousel-caption d-none d-md-block text-info" style="font-size:2cm;">
+              alt=""
+            />
+            <div
+              class="carousel-caption d-none d-md-block text-info"
+              style="font-size: 2cm"
+            >
               <font class="font-weight-bold">歡慶周年慶!!</font>
-              <br/>
-              <font class="font-weight-bold" style="font-size:1.5cm;">輸入優惠碼:HAPPY即享8折</font>
+              <br />
+              <font class="font-weight-bold" style="font-size: 1.5cm"
+                >輸入優惠碼:HAPPY即享8折</font
+              >
             </div>
           </div>
           <div class="carousel-item">
@@ -89,7 +136,10 @@
               src="https://upload.cc/i1/2021/09/20/nZChHm.jpg"
               alt=""
             />
-            <div class="carousel-caption d-none d-md-block text-dark" style="font-size:2cm;">
+            <div
+              class="carousel-caption d-none d-md-block text-dark"
+              style="font-size: 2cm"
+            >
               <font class="font-weight-bold">情人節商品特價中!!</font>
             </div>
           </div>
@@ -99,10 +149,15 @@
               src="https://upload.cc/i1/2021/09/20/Qatun0.jpg"
               alt=""
             />
-            <div class="carousel-caption d-none d-md-block text-dark" style="font-size:2cm;">
+            <div
+              class="carousel-caption d-none d-md-block text-dark"
+              style="font-size: 2cm"
+            >
               <font class="font-weight-bold">新商品上架!!</font>
-              <br/>
-              <font class="font-weight-bold" style="font-size:1.5cm;">出租一個聖誕老人吧!!</font>
+              <br />
+              <font class="font-weight-bold" style="font-size: 1.5cm"
+                >出租一個聖誕老人吧!!</font
+              >
             </div>
           </div>
 
@@ -123,7 +178,7 @@
         </div>
       </div>
     </div>
-    <br/>
+    <br />
     <div class="container.container-fluid">
       <div class="row">
         <div class="col-md-2">
@@ -131,7 +186,7 @@
           <div class="list-group sticky-top">
             <a
               class="list-group-item list-group-item-action"
-              :class="{active:topic=='all'}"
+              :class="{ active: topic == 'all' }"
               @click.prevent="changeTopic('all')"
               data-toggle="list"
               href="#list-gold"
@@ -140,20 +195,29 @@
             >
             <a
               class="list-group-item list-group-item-action"
-              :class="{active:topic=='love'}"
+              :class="{ active: topic == 'love' }"
               @click.prevent="changeTopic('love')"
               data-toggle="list"
               href="#list-gift"
             >
               <i class="fas fa-heart"></i> 情人節</a
             >
-            <a href="#" class="list-group-item list-group-item-action"
-             @click.prevent="changeTopic('mom')" :class="{active:topic=='mom'}">
+            <a
+              href="#"
+              class="list-group-item list-group-item-action"
+              @click.prevent="changeTopic('mom')"
+              :class="{ active: topic == 'mom' }"
+            >
               <i class="fas fa-gift"></i> 母親節</a
             >
-            <a href="#" class="list-group-item list-group-item-action"
-             @click.prevent="changeTopic('mas')" :class="{active:topic=='mas'}">
-              <i class="fas fa-tree"></i> 聖誕節</a>
+            <a
+              href="#"
+              class="list-group-item list-group-item-action"
+              @click.prevent="changeTopic('mas')"
+              :class="{ active: topic == 'mas' }"
+            >
+              <i class="fas fa-tree"></i> 聖誕節</a
+            >
           </div>
         </div>
         <div class="col-md-10">
@@ -169,8 +233,11 @@
                   aria-label="Search"
                 />
                 <div class="input-group-append">
-                  <button class="btn btn-outline-warning" type="submit"
-                   @click="changeTopic('Search')">
+                  <button
+                    class="btn btn-outline-warning"
+                    type="submit"
+                    @click="changeTopic('Search')"
+                  >
                     <i class="fa fa-search" aria-hidden="true"></i> Search
                   </button>
                 </div>
@@ -194,14 +261,19 @@
                         background-size: cover;
                         background-position: center;
                       "
-                      :style="{ backgroundImage: `url(${item.imageUrl})` }"
-                    ></div>
+                      :style="{ backgroundImage: `url(${item.imageUrl})` }">
+                      <a href="#" class="float-right">
+                        <i class="fas fa-star fa-2x" @click.prevent="addToStared(item.id)"></i>
+                      </a>
+                    </div>
                     <div class="card-body">
                       <span class="badge badge-secondary float-right ml-2">{{
                         item.category
                       }}</span>
                       <h5 class="card-title">
-                        <a href="#" class="font-weight-bold text-dark">{{ item.title }}</a>
+                        <a href="#" class="font-weight-bold text-dark">{{
+                          item.title
+                        }}</a>
                       </h5>
                       <div
                         class="
@@ -233,11 +305,11 @@
                       <button
                         type="button"
                         class="btn btn-outline-danger btn-lg ml-auto"
-                        @click="addToCart(item.id, item.num)"
+                        @click="addToCart(item.id, 1)"
                       >
-                      <i
-                        class="fas fa-spinner fa-spin"
-                        v-if="status.loadingItem === item.id"
+                        <i
+                          class="fas fa-spinner fa-spin"
+                          v-if="status.loadingItem === item.id"
                         ></i>
                         加到購物車
                       </button>
@@ -290,11 +362,47 @@ export default {
       status: {
         loadingItem: "",
       },
-      search:'',
-      topic:'all',
+      search: "",
+      topic: "all",
+      stared:[],
     };
   },
   methods: {
+    cancelStared(){
+      const vm=this;
+      vm.stared=[];
+      localStorage.setItem("wishList", JSON.stringify(vm.stared));
+    },
+    addToStared(id){
+      const vm=this;
+      vm.isLoading = true;
+      var s=vm.products.filter((item) => {
+        return item.id===id;
+      });
+      if(vm.stared.length===0){
+         vm.stared.push(s[0]);
+         localStorage.setItem("wishList", JSON.stringify(vm.stared));
+         vm.isLoading = false;
+      }else if(vm.stared.includes(s[0])){
+        window.alert("已加入清單")
+        vm.isLoading = false;
+      }else{
+        vm.stared.push(s[0]);
+        localStorage.setItem("wishList", JSON.stringify(vm.stared));
+        vm.isLoading = false;
+      }
+    },
+    cancelSatred(id){
+      const vm=this;
+      vm.isLoading = true;
+      const cancelIndex=vm.stared.findIndex((item)=>{
+        return item.id===id;
+      })
+      vm.stared.splice(cancelIndex,1)
+      localStorage.setItem("wishList", JSON.stringify(vm.stared));
+      vm.isLoading = false;
+      
+    },
     getGoods() {
       const vm = this;
       vm.isLoading = true;
@@ -309,11 +417,14 @@ export default {
           vm.isLoading = false;
         }
       });
+      //建立暫存空間
+      vm.stared = JSON.parse(localStorage.getItem('wishList')) || []
     },
     getMore(id) {
       const vm = this;
       vm.status.loadingItem = id;
-      vm.$router.push(`/checkmore/${id}`);
+      // vm.$router.push({path:`/checkmore/${id}`,query:{value:vm.stared}});
+      vm.$router.push(`/checkmore/${id}`)
       vm.status.loadingItem = "";
     },
     addToCart(id, qty = 1) {
@@ -358,26 +469,34 @@ export default {
       vm.$router.push(`/payorder`);
       vm.isLoading = false;
     },
-    changeTopic(s){
-      const vm=this;
-      vm.topic=s;
-    }
+    changeTopic(s) {
+      const vm = this;
+      vm.topic = s;
+    },
   },
-  computed:{
-    filterData(){
-      const vm=this;
-      if(vm.topic==="all"){
+  computed: {
+    filterData() {
+      const vm = this;
+      if (vm.topic === "all") {
         return vm.products;
-      }else if(vm.topic==="love"){
-        return  vm.products.filter(item=>{return item.category==='情人節'})
-      }else if(vm.topic==="mom"){
-        return  vm.products.filter(item=>{return item.category==='母親節'})
-      }else if(vm.topic==="mas"){
-        return  vm.products.filter(item=>{return item.category==='聖誕節'})
-      }else if(vm.topic==="Search"){
-        return  vm.products.filter(item=>{return item.title.includes(vm.search)})
+      } else if (vm.topic === "love") {
+        return vm.products.filter((item) => {
+          return item.category === "情人節";
+        });
+      } else if (vm.topic === "mom") {
+        return vm.products.filter((item) => {
+          return item.category === "母親節";
+        });
+      } else if (vm.topic === "mas") {
+        return vm.products.filter((item) => {
+          return item.category === "聖誕節";
+        });
+      } else if (vm.topic === "Search") {
+        return vm.products.filter((item) => {
+          return item.title.includes(vm.search);
+        });
       }
-    }
+    },
   },
   created() {
     this.getGoods();

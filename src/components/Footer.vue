@@ -3,10 +3,10 @@
     <footer class="bg-secondary text-muted py-5">
       <div class="container">
         <ul class="list-inline text-center">
-          <li class="list-inline-item text-custom" >© Copright 2017 六角血拼賣賣</li>
+          <li class="list-inline-item text-custom" >©Vue網站練習</li>
           <li class="list-inline-item">
             <a class="text-custom" href="#">
-              <i class="fa fa-instagram" aria-hidden="true"></i> Instagrame</a
+              <i class="fa fa-instagram" aria-hidden="true"></i>Instagrame</a
             >
           </li>
           <li class="list-inline-item">

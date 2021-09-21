@@ -1,4 +1,4 @@
 export default function(num){
-    const currency=new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 3 }).format(num)
+    const currency=new Intl.NumberFormat('en-US', { minimumFractionDigits: 0}).format(num)
     return currency;
 }

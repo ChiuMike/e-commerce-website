@@ -90,7 +90,7 @@
                       {{item.product.title}}
                       <div class="text-custom2" v-if="item.coupon">已套用優惠券</div>
                   </td>
-                  <td class="align-middle">{{item.product.num}} 件</td>
+                  <td class="align-middle">{{item.qty}} 件</td>
                   <td class="align-middle text-right">${{item.final_total}}</td>
                 </tr>
                 <tr>
