@@ -103,10 +103,7 @@
                       item.title
                     }}</a>
                   </td>
-                  <td class="align-middle">
-                    {{ item.num }} {{ item.unit }}
-                  </td>
-                  <td class="align-middle text-right">${{ item.price }}</td>
+                  <td class="align-middle text-right">${{ item.price }}/{{item.unit}}</td>
                 </tr>
               </tbody>
             </table>
