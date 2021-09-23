@@ -252,6 +252,9 @@ export default {
       const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/product/${id}`;
       this.$http.get(api).then((response) => {
         if (response.data.success) {
+          const token=response.data.token;
+          const expired=response.data.expired;
+          document.cookie=`hexToken=${token}; expires=${new Date(expired)};`; //將cookie存入前端
           vm.product = response.data.product;
         }
       });
@@ -263,6 +266,9 @@ export default {
       vm.isLoading = true;
       this.$http.get(api).then((response) => {
         console.log("GetCart: ", response.data);
+        const token=response.data.token;
+        const expired=response.data.expired;
+        document.cookie=`hexToken=${token}; expires=${new Date(expired)};`; //將cookie存入前端
         vm.isLoading = false;
         vm.carts = response.data.data;
         console.log("vm", vm.carts);

@@ -411,6 +411,10 @@ export default {
         vm.isLoading = false;
         console.log("購物車api=", response.data);
         if (response.data.success) {
+          const token=response.data.token;
+          const expired=response.data.expired;
+          console.log(token, expired);
+          document.cookie=`hexToken=${token}; expires=${new Date(expired)};`; //將cookie存入前端
           response.data.products.forEach(function (item) {
             vm.products.push(item);
           });
@@ -449,6 +453,9 @@ export default {
       const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/cart`;
       vm.isLoading = true;
       this.$http.get(api).then((response) => {
+        const token=response.data.token;
+        const expired=response.data.expired;
+        document.cookie=`hexToken=${token}; expires=${new Date(expired)};`; //將cookie存入前端
         vm.isLoading = false;
         vm.cart = response.data.data;
         console.log("vm.cart=", vm.cart);

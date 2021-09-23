@@ -238,6 +238,9 @@ export default {
       const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/cart`;
       vm.isLoading = true;
       this.$http.get(api).then((response) => {
+        const token=response.data.token;
+        const expired=response.data.expired;
+        document.cookie=`hexToken=${token}; expires=${new Date(expired)};`; //將cookie存入前端
         vm.isLoading = false;
         vm.cart = response.data.data;
         console.log("payorder=", vm.cart);

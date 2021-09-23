@@ -13,6 +13,10 @@ export default {
     return {
       star:[],
     }
+  },
+  created(){
+    const myCookie = document.cookie.replace(/(?:(?:^|.*;\s*)hexToken\s*=\s*([^;]*).*$)|^.*$/, '$1');
+    this.$http.defaults.headers.common.Authorization = myCookie;
   }
 }
 </script>

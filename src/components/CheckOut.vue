@@ -134,6 +134,9 @@ export default {
       this.$http.post(api).then((response) => {
         vm.isLoading = false;
         if (response.data.success) {
+          const token=response.data.token;
+          const expired=response.data.expired;
+          document.cookie=`hexToken=${token}; expires=${new Date(expired)};`; //將cookie存入前端
           vm.getOrder();
         }
       });
