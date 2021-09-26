@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="bg-custom3">
     <loading :active.sync="isLoading" />
     <nav class="navbar navbar-light bg-secondary">
       <a

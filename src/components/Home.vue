@@ -16,8 +16,8 @@
       </a>
       <div class="d-flex">
       <div class="dropdown ml-auto">
-        <button
-          class="btn btn-cart"
+        <a
+          class="btn btn-secondary"
           data-toggle="dropdown"
           data-flip="false"
         >
@@ -26,7 +26,7 @@
             cart.carts.length
           }}</span>
           <span class="sr-only">unread messages</span>
-        </button>
+        </a>
         <div
           class="dropdown-menu dropdown-menu-right p-3"
           style="min-width: 300px"
@@ -58,18 +58,18 @@
       </div>
       <router-link to="/payorder">
         <button 
-         class="btn btn-outline-success btn-lg"
+         class="btn btn-secondary btn-lg text-success"
          style="margin-right: 10px">
-         結帳
+         <i class="fas fa-donate">結帳</i>
         </button>
       </router-link>
       <div class="dropdown">
         <button 
-        class="btn btn-outline-danger btn-lg"
+        class="btn btn-secondary btn-lg text-success"
         data-toggle="dropdown"
         data-flip="false"
         style="position: relative;float: right;">
-         願望清單
+         <i class="fas fa-star">願望清單</i>
         </button>
         <div
           class="dropdown-menu dropdown-menu-right p-3"
@@ -206,10 +206,8 @@
               href="#"
               class="list-group-item list-group-item-action"
               @click.prevent="changeTopic('mom')"
-              :class="{ active: topic == 'mom' }"
-            >
-              <i class="fas fa-gift"></i> 母親節</a
-            >
+              :class="{ active: topic == 'mom' }">
+              <i class="fas fa-gift"></i> 母親節</a>
             <a
               href="#"
               class="list-group-item list-group-item-action"
@@ -262,8 +260,11 @@
                         background-position: center;
                       "
                       :style="{ backgroundImage: `url(${item.imageUrl})` }">
-                      <a href="#" class="float-right">
-                        <i class="fas fa-star fa-2x" @click.prevent="addToStared(item.id)"></i>
+                      <a href="#" class="float-right" style="color:red;">
+                        <i class="far fa-heart fa-lg" @click.prevent="addToStared(item.id)"
+                         :class="{ 'fas': stared.includes(item), 
+                         'far': !stared.includes(item)}"
+                        ></i>
                       </a>
                     </div>
                     <div class="card-body">
@@ -317,26 +318,6 @@
                   </div>
                 </div>
               </div>
-              <!-- pagination -->
-              <!-- <nav aria-label="Page navigation" class="my-5">
-                <ul class="pagination justify-content-center">
-                  <li class="page-item disabled">
-                    <a class="page-link" href="#" tabindex="-1">Previous</a>
-                  </li>
-                  <li class="page-item">
-                    <a class="page-link" href="#">1</a>
-                  </li>
-                  <li class="page-item">
-                    <a class="page-link" href="#">2</a>
-                  </li>
-                  <li class="page-item">
-                    <a class="page-link" href="#">3</a>
-                  </li>
-                  <li class="page-item">
-                    <a class="page-link" href="#">Next</a>
-                  </li>
-                </ul>
-              </nav> -->
             </div>
           </div>
           <!-- tab-content end -->
@@ -379,6 +360,7 @@ export default {
       var s=vm.products.filter((item) => {
         return item.id===id;
       });
+      console.log("s=",s)
       if(vm.stared.length===0){
          vm.stared.push(s[0]);
          localStorage.setItem("wishList", JSON.stringify(vm.stared));
@@ -401,7 +383,6 @@ export default {
       vm.stared.splice(cancelIndex,1)
       localStorage.setItem("wishList", JSON.stringify(vm.stared));
       vm.isLoading = false;
-      
     },
     getGoods() {
       const vm = this;
@@ -524,4 +505,10 @@ carousel .carousel-item {
   max-height: 400px;
   object-fit: cover;
 }
+/* .starColor1{
+  background-color: #7e0023;
+}
+.starColor2{
+  background-color: #ffff00;
+} */
 </style>

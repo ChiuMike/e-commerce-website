@@ -191,7 +191,7 @@
           ></div>
           <div class="alert alert-secondary mt-4" role="alert">
             <h2 class="text-center">購物說明</h2>
-            <p>練習用，購買了不會出貨!</p>
+            <p class="text-center">練習用，購買了不會出貨!</p>
           </div>
         </div>
       </div>
