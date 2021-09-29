@@ -387,7 +387,7 @@ export default {
     getGoods() {
       const vm = this;
       vm.isLoading = true;
-      const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/products?`;
+      const api = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/products?page=${2}`;
       this.$http.get(api).then((response) => {
         vm.isLoading = false;
         console.log("購物車api=", response.data);
